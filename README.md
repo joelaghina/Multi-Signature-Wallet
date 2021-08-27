@@ -55,6 +55,14 @@ You will also see any lint errors in the console.
 
 ```
 
+npm run build
+
+```
+
+## Hosting Via gh-pages
+
+```
+
 npm run deploy
 
 ```
