@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 And Using [Typescript](https://www.typescriptlang.org/).
 
-A multisig wallet is a wallet shared by to or more users called copayers. Depending on the kind of wallet, the number of signatures required to sign a transaction will be lower or equal to the number of copayers of the wallet.
+A multisig wallet is a wallet shared by two or more users called copayers. Depending on the kind of wallet, the number of signatures required to sign a transaction will be lower or equal to the number of copayers of the wallet.
 
 On Deploy (i.e the Contract) you can set the number of users and the number of signatures required to confirm a transaction.
 Only these explicitly defined users (i.e Users address) are able to carry out any transaction on the wallet.
