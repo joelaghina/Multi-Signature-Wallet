@@ -28,18 +28,25 @@ interface IERC20Token {
 
 contract MultiSigWallet {
     //Variables
+    
+    // cusd token address
     address internal cUsdTokenAddress =
         0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
+// stores address of all the owners 
     address[] public owners;
 
+// checks if the caller is the owner
     mapping(address => bool) public isOwner;
 
     uint256 public numConfirmationsRequired;
 
+
+// the address of the smart contract
     address public walletAddr;
 
-    uint256 public walletBalance;
+
+// struct for Transaction types
 
     struct Transaction {
         address to;
@@ -49,6 +56,8 @@ contract MultiSigWallet {
         uint256 numConfirmations;
         mapping(address => bool) isConfirmed;
     }
+    
+    // array of transaction IDs
 
     Transaction[] public transactions;
 
@@ -118,6 +127,8 @@ contract MultiSigWallet {
 
     //Functions
     function deposit(uint256 _amount) public payable {
+        
+        require(_amount > 0, "Enter a higher value to deposit");
         require(
             IERC20Token(cUsdTokenAddress).transferFrom(
                 msg.sender,
@@ -141,6 +152,7 @@ contract MultiSigWallet {
         return balance;
     }
 
+// add a transaction to the blockchain
     function submitTransaction(
         address _to,
         uint256 _value,
@@ -214,6 +226,7 @@ contract MultiSigWallet {
         txExists(_txIndex)
         notExecuted(_txIndex)
     {
+        require(_txIndex >= 0, "Enter a valid index");
         Transaction storage transaction = transactions[_txIndex];
 
         require(transaction.isConfirmed[msg.sender], "tx not confirmed");
@@ -235,7 +248,11 @@ contract MultiSigWallet {
             uint256 numConfirmations
         )
     {
+        
+        require(_txIndex >= 0, "Enter a valid index");
         Transaction storage transaction = transactions[_txIndex];
+        
+        require(transaction.to != address(0), "This transaction does not exist");
 
         return (
             transaction.to,
@@ -263,6 +280,8 @@ contract MultiSigWallet {
         view
         returns (bool)
     {
+        
+        require(_owner != address(0), "Invalid owner");
         Transaction storage transaction = transactions[_txIndex];
 
         return transaction.isConfirmed[_owner];
