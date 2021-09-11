@@ -32,13 +32,13 @@ interface GetResponse {
   transactions: Transaction[];
 }
 
-export async function approve(web3: Web3, account: string, price: BigNumber ) {
+async function approve(web3: Web3, account: string, amount: string ) {
   const kit = newKitFromWeb3(web3);
 
   const cUSDContract = new kit.web3.eth.Contract(erc20 as AbiItem, cUSDContractAddress);
   // eslint-disable-next-line
   const result = await cUSDContract.methods
-    .approve(MWContractAddress, price)
+    .approve(MWContractAddress, amount)
     .send({ from: account})
   return result
 }
@@ -98,20 +98,27 @@ export async function deposit(
   }
 ) {
   const { amount } = params;
+  
+  const amountInString = amount.toString();
 
   const kit = newKitFromWeb3(web3);
 
   const contract = new kit.web3.eth.Contract(multiSigWallet as AbiItem, MWContractAddress)
-  
+  let isApproved = true;
   try {
-    await approve(web3, account, amount)
+    await approve(web3, account, amountInString)
   } catch (error) {
     alert(`⚠️ ${error}.`)
+    isApproved = false;
   }
-  // eslint-disable-next-line
-  const result = await contract.methods
-    .deposit(amount)
+  if(isApproved){
+    // eslint-disable-next-line
+    const result = await contract.methods
+    .deposit(amountInString)
     .send({ from: account})
+  }else{
+   alert('Please approve contract to be able to spend cUSD from your wallet')
+  }
 }
 
 export async function submitTx(
@@ -132,9 +139,10 @@ export async function submitTx(
   try {
     
     const _amount = new BigNumber(amount).shiftedBy(ERC20_DECIMALS)
+    const _amountInString  = _amount.toString();
     // eslint-disable-next-line
     const result = await contract.methods
-      .submitTransaction(to, _amount, purpose)
+      .submitTransaction(to, _amountInString, purpose)
       .send({ from: account })
   } catch (error) {
     alert(`⚠️ ${error}.`)
