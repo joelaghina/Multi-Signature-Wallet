@@ -90,10 +90,6 @@ contract MultiSigWallet {
         _;
     }
 
-    modifier enoughBal(uint256 _amount) {
-        _;
-    }
-
     //Constructor
     constructor(address[] memory _owners, uint256 _numConfirmationsRequired) {
         require(
