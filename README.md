@@ -54,9 +54,6 @@ You will also see any lint errors in the console.
 ## Build
 
 ```
-
-<<<<<<< HEAD
-=======
 npm run build
 
 ```
@@ -64,8 +61,6 @@ npm run build
 ## Hosting Via gh-pages
 
 ```
-
->>>>>>> 1bf97590d05f78e4f9dc4ae1796107be7a9e0707
 npm run deploy
 
 ```
