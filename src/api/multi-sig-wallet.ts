@@ -110,8 +110,6 @@ export async function deposit(
   // NOTE: error when passing BigNumber type, so pass string
   const _amountString = _amount.toString()
 
-  alert(_amountString)
-
   const kit = newKitFromWeb3(web3);
 
   const contract = new kit.web3.eth.Contract(MultiSigWalletJson.abi, MWContractAddress);
