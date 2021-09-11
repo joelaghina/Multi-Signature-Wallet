@@ -1,4 +1,4 @@
-# MULTI-SIGNATURE-WALLET
+# [MULTI-SIGNATURE-WALLET](https://joelaghina.github.io/Multi-Signature-Wallet/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,7 +6,7 @@ And Using [Typescript](https://www.typescriptlang.org/).
 
 A multisig wallet is a wallet shared by two or more users called copayers. Depending on the kind of wallet, the number of signatures required to sign a transaction will be lower or equal to the number of copayers of the wallet.
 
-On Deploy (i.e the Contract) you can set the number of users and the number of signatures required to confirm a transaction.
+On Deploy (i.e the Contract) you can set the number of users and the nu.mber of signatures required to confirm a transaction.
 Only these explicitly defined users (i.e Users address) are able to carry out any transaction on the wallet.
 
 Deposits are allowed from other wallets asides the defined users(owners).
@@ -55,6 +55,17 @@ You will also see any lint errors in the console.
 
 ```
 
+<<<<<<< HEAD
+=======
+npm run build
+
+```
+
+## Hosting Via gh-pages
+
+```
+
+>>>>>>> 1bf97590d05f78e4f9dc4ae1796107be7a9e0707
 npm run deploy
 
 ```
